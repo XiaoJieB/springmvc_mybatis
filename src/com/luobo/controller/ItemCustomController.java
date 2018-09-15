@@ -3,6 +3,7 @@ package com.luobo.controller;
 
 import com.luobo.po.Item;
 import com.luobo.po.ItemCustom;
+import com.luobo.po.ItemQueryVo;
 import com.luobo.service.ItemCustomService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class ItemCustomController {
     private ItemCustomService itemCustomService;
 
     @RequestMapping("/list")
-    public ModelAndView itemlist() throws Exception {
-        List<ItemCustom> items = itemCustomService.findItemCustomList(null);
+    public ModelAndView itemlist(ItemQueryVo itemQueryVo) throws Exception {
+        List<ItemCustom> items = itemCustomService.findItemCustomList(itemQueryVo);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("items",items);
         modelAndView.setViewName("item/list");
@@ -46,9 +47,34 @@ public class ItemCustomController {
         ItemCustom itemCustom = new ItemCustom();
         BeanUtils.copyProperties(item,itemCustom);
         itemCustomService.updateItem(item.getId(),itemCustom);
-//        List<ItemCustom> items = itemCustomService.findItemCustomList(null);
         ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("items",items);
+        modelAndView.setViewName("redirect:list");
+        return modelAndView;
+    }
+
+    @RequestMapping("/deleteItems")
+    public ModelAndView deleteItems(Integer[] itemsId) throws Exception {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:list");
+        return modelAndView;
+    }
+
+    @RequestMapping("/editItems")
+    public ModelAndView editItems(ItemQueryVo itemQueryVo) throws Exception {
+        List<ItemCustom> items = itemCustomService.findItemCustomList(itemQueryVo);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("items",items);
+        modelAndView.setViewName("item/editItems");
+        return modelAndView;
+    }
+
+    @RequestMapping("/updateItems")
+    public ModelAndView updateItems(Item item) throws Exception {
+        ItemCustom itemCustom = new ItemCustom();
+        BeanUtils.copyProperties(item,itemCustom);
+        itemCustomService.updateItem(item.getId(),itemCustom);
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:list");
         return modelAndView;
     }

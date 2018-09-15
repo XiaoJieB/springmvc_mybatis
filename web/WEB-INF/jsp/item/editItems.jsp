@@ -26,8 +26,8 @@
             document.listForm.submit();
         }
 
-        function deleteItems() {
-            document.listForm.action="deleteItems";
+        function updateItems() {
+            document.listForm.action="updateItems";
             document.listForm.submit();
         }
     </script>
@@ -52,28 +52,32 @@
             <td></td>
             <td><input name="itemCustom.name"></td>
             <td><input type="button" value="查询" onclick="list1()"></td>
-            <td><input type="button" value="批量删除" onclick="deleteItems()"></td>
+            <td><input type="button" value="批量修改提交" onclick="updateItems()"></td>
         </tr>
         </table>
         <table class="table table-bordered table-striped">
             <tr>
                 <th>选择</th>
-                <th>ID</th>
+                <%--<th>ID</th>--%>
                 <th>名称</th>
                 <th>价格</th>
+                <th>时间</th>
                 <th>操作</th>
             </tr>
 
             <c:forEach items="${items}" var="item">
                 <tr>
                     <td><input type="checkbox" name="itemsId" value="${item.id}"> </td>
-                    <td>${item.id}</td>
-                    <td>${item.name}</td>
-                    <td>${item.price}</td>
+                    <%--<td>${item.id}</td>--%>
+                    <td><input name="name" value="${item.name}"> </td>
+                    <td><input name="price" value="${item.price}"></td>
+                    <input  type="text" class="form-control" name="createTime"
+                            value="<fmt:formatDate value="${item.createTime}"
+                    type="DATE" pattern="yyyy-MM-dd hh:mm:ss"/>"/>
                     <td>
-                        <a href="/item/show/${item.id}" type="button" class="btn btn-sm btn-success">详情</a>
-                        <a href="/item/edit?id=${item.id}" type="button" class="btn btn-sm btn-warning">修改</a>
-                        <a href="/item/delete/${item.id}" type="button" class="btn btn-sm btn-danger">删除</a>
+                        <%--<a href="/item/show/${item.id}" type="button" class="btn btn-sm btn-success">详情</a>--%>
+                        <%--<a href="/item/edit?id=${item.id}" type="button" class="btn btn-sm btn-warning">修改</a>--%>
+                        <%--<a href="/item/delete/${item.id}" type="button" class="btn btn-sm btn-danger">删除</a>--%>
                     </td>
                 </tr>
             </c:forEach>

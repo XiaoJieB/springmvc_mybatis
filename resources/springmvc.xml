@@ -17,7 +17,7 @@
        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <!--代替上面俩-->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
     <!--注解handler单配-->
     <!--<bean class="com.luobo.controller.ItemController3"/>-->
     <context:component-scan base-package="com.luobo"></context:component-scan>
@@ -27,6 +27,16 @@
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 <property name="prefix" value="/WEB-INF/jsp/"/>
 <property name="suffix" value=".jsp"/>
-
 </bean>
+<!--自定义转换器-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.luobo.converter.CustomDateConverter"></bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--校验器-->
+    <bean id="validator" class=""
 </beans>
