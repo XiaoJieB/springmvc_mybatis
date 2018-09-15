@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luobo.mapper.ItemMapperCustom" >
+  <!--sql片段-->
+  <sql id="item_query_where">
+    <if test="itemCustom != null">
+      <if test="itemCustom.name != null and itemCustom.name != ''">
+        item.name like '%${itemCustom.name}%'
+      </if>
+    </if>
+  </sql>
+<select id="findItemCustomList" parameterType="com.luobo.po.ItemQueryVo" resultType="com.luobo.po.ItemCustom">
+  select item.* from item
+  <where>
+    <include refid="item_query_where"></include>
+  </where>
+</select>
+</mapper>
