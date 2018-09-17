@@ -1,5 +1,7 @@
 package com.luobo.po;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Item {
@@ -17,6 +19,7 @@ public class Item {
      *
      * @mbggenerated Sat Sep 15 09:51:47 CST 2018
      */
+    @NotNull(message = "item.price.isNull")
     private Long price;
 
     /**
@@ -25,6 +28,8 @@ public class Item {
      *
      * @mbggenerated Sat Sep 15 09:51:47 CST 2018
      */
+    //校验名称
+            @Size(min=1,max=10,message = "{item.name.length.error}")
     private String name;
 
     /**

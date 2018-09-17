@@ -8,6 +8,10 @@ import com.luobo.service.ItemCustomService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,13 +47,20 @@ public class ItemCustomController {
     }
 
     @RequestMapping("/update")
-    public ModelAndView update(Item item) throws Exception {
+    //在需要校验的pojo前面加validated,后面加bindingResult接受参数
+    public String update(@Validated Item item, BindingResult bindingResult,ModelMap modelMap) throws Exception {
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            for (ObjectError objectError : errors) {
+                System.out.println(objectError);
+            }
+            modelMap.addAttribute("errors",errors);
+        }
+
         ItemCustom itemCustom = new ItemCustom();
         BeanUtils.copyProperties(item,itemCustom);
-        itemCustomService.updateItem(item.getId(),itemCustom);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:list");
-        return modelAndView;
+        itemCustomService.updateItem(item.getId(),itemCustom);;
+        return "redirect:list";
     }
 
     @RequestMapping("/deleteItems")
