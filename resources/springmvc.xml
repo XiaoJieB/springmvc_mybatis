@@ -62,4 +62,20 @@
             <value>5242880</value>
         </property>
     </bean>
+
+    <!--mvc拦截器/**拦截url包括子url-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <bean class="com.luobo.interceptor.HandlerInterceptor1"/>
+    </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.luobo.interceptor.HandlerInterceptor2"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.luobo.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

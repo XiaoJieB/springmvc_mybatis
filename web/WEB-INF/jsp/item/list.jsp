@@ -40,6 +40,10 @@
     <%--<h3>所有用户 <a href="/admin/items/add" type="button" class="btn btn-primary btn-sm">添加</a>--%>
         <%--<a href="/report/export" type="button" class="btn btn-primary btn-sm">导出excel表格</a>--%>
     <%--</h3>--%>
+    当前用户：${userName}，
+    <c:if test="${userName != null}">
+         <a href="/logout">退出</a>
+    </c:if>
     <form id="listForm" name="listForm" action="list" method="post">
         <table>
             <tr>

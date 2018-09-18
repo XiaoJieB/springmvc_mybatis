@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ItemCustomController {
     private ItemCustomService itemCustomService;
 
     @RequestMapping("/list")
-    public ModelAndView itemlist(ItemQueryVo itemQueryVo) throws Exception {
+    public ModelAndView itemlist(ItemQueryVo itemQueryVo, HttpSession httpSession) throws Exception {
         List<ItemCustom> items = itemCustomService.findItemCustomList(itemQueryVo);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("items",items);
