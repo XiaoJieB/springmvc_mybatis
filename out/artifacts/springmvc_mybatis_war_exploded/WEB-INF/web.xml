@@ -38,7 +38,10 @@
             <param-value>classpath*:springmvc.xml</param-value>
         </init-param>
     </servlet>
-    <!--url解析映射-->
+    <!--url解析映射
+    1 .action
+    2 /，静态资源不让dispatcher配置
+    3 /*-->
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>

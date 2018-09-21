@@ -18,6 +18,19 @@
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+
+
+        function list1() {
+            document.listForm.action="list";
+            document.listForm.submit();
+        }
+
+        function deleteItems() {
+            document.listForm.action="deleteItems";
+            document.listForm.submit();
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -26,19 +39,29 @@
 
     <%--<h3>所有用户 <a href="/admin/items/add" type="button" class="btn btn-primary btn-sm">添加</a>--%>
         <%--<a href="/report/export" type="button" class="btn btn-primary btn-sm">导出excel表格</a>--%>
-    </h3>
-
-    <!-- 如果用户列表为空 -->
-    <c:if test="${empty items}">
-        <div class="alert alert-warning" role="alert">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>User表为空，请<a href="/admin/items/add" type="button" class="btn btn-primary btn-sm">添加</a>
-        </div>
+    <%--</h3>--%>
+    当前用户：${userName}，
+    <c:if test="${userName != null}">
+         <a href="/logout">退出</a>
     </c:if>
-
-    <!-- 如果用户列表非空 -->
-    <c:if test="${!empty items}">
+    <form id="listForm" name="listForm" action="list" method="post">
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        <tr>
+            <td></td>
+            <td><input name="itemCustom.name"></td>
+            <td><input type="button" value="查询" onclick="list1()"></td>
+            <td><input type="button" value="批量删除" onclick="deleteItems()"></td>
+        </tr>
+        </table>
         <table class="table table-bordered table-striped">
             <tr>
+                <th>选择</th>
                 <th>ID</th>
                 <th>名称</th>
                 <th>价格</th>
@@ -47,6 +70,7 @@
 
             <c:forEach items="${items}" var="item">
                 <tr>
+                    <td><input type="checkbox" name="itemsId" value="${item.id}"> </td>
                     <td>${item.id}</td>
                     <td>${item.name}</td>
                     <td>${item.price}</td>
@@ -58,7 +82,7 @@
                 </tr>
             </c:forEach>
         </table>
-    </c:if>
+    </form>
 </div>
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->

@@ -1,6 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>--%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -37,12 +37,12 @@
             <input type="text" class="form-control" id="price" name="price" placeholder="Enter price:"
                    value="${item.price}"/>
         </div>
-        <%--<div class="form-group">--%>
-            <%--<label>createTime:</label>--%>
-            <%--<input class="form-control" name="createTime"--%>
-                   <%--value="<fmt:formatDate value="${item.createDate}"--%>
-                    <%--type="DATE" pattern="yyyy-MM-dd"/>"/>--%>
-        <%--</div>--%>
+        <div class="form-group">
+            <label>createTime:</label>
+            <input  type="text" class="form-control" name="createTime"
+                   value="<fmt:formatDate value="${item.createTime}"
+                    type="DATE" pattern="yyyy-MM-dd hh:mm:ss"/>"/>
+        </div>
         <input type="hidden" id="id" name="id" value="${item.id}"/>
 
         <div class="form-group">
